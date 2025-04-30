@@ -5,11 +5,21 @@ This quick project adds a simple login One Time Password to your Django project.
 ## Installation instructions
 
 - Check out repository in folder named 'django_login_otp'
-- Add 'django_login_otp' to your settings.py
+- Add 'django_login_otp' to your INSTALLED_APPS in settings.py
 - python manage.py migrate
 - Customize the 2 templates:
   - email_code.html is the text that will be sent to your users
   - enter_otp.html is the screen they use to enter the One Time Password
+- IMPORTANT: You must add the following to your projects urls.py BEFORE any other registration/accounts/socialauth URL:
+  ```
+   from django_login_otp import views as otp_views
+
+   urlpattens = [
+        path('accounts/login/', otp_views.OtpLoginView.as_view(), name="login"),
+        ...
+   ]
+  ```
+        
  
 You should override the enter_otp.html with your sites theme, CSS classes, etc.  The default is Bootstrap 5.2.
 
