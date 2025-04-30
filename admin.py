@@ -1,16 +1,7 @@
 from django.contrib import admin
+from django_login_otp.models import OTPUser
 
-from django.apps import apps
+class OTPUserAdmin(admin.ModelAdmin):
+    list_display = ('user', 'last_valid_otp', 'current_otp_sent')
 
-core_models = apps.get_app_config('django_login_otp').get_models()
-
-# Register your models here.
-from .models import *
-
-# Register all
-
-for model in core_models:
-    try:
-        admin.site.register(model)
-    except admin.sites.AlreadyRegistered:
-        pass
+admin.site.register(OTPUser, OTPUserAdmin)
