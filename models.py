@@ -8,7 +8,7 @@ class OTPUser(models.Model):
     )
     last_valid_otp = models.DateTimeField(blank=True, null=True)
     current_otp_sent = models.DateTimeField(blank=True, null=True)
-    current_otp = models.CharField(max_length=25, blank=True)
+    current_otp = models.CharField(max_length=50, blank=True)
 
     class Meta:
         verbose_name = "User"
