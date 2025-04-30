@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "One Time Password" %}{% endblock %}
+
+{% block content %}
+	<div class="m-3 m-lg-5">
+
+		<div class="text-center mt-4">
+			<h1 class="h3">{% trans "One Time Password" %}</h1>
+
+            <p>{% trans "Since it has been a while since you have logged in, we require you to also enter a code that we have sent to your email." %}</p>
+
+		<form class="login" method="POST" action="/accounts/login/">
+			{% csrf_token %}
+			{{ form }}
+			{% if redirect_field_value %}
+				<input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+			{% endif %}
+			<div class="mt-4">
+				<div class="col text-end">
+					<button type="submit" class="btn btn-primary rounded-pill py-2 px-5">{% trans "Sign In" %}</button>
+				</div>
+			</div>
+		</form>
+
+	</div>
+
+	</div>
+{% endblock %}
